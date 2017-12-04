@@ -1,0 +1,4 @@
+# Magda Gateway heeft geen DB van doen...
+# spring:
+#   datasource:
+#     jndi-name: jdbc/magdagwyDataSource

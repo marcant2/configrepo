@@ -1,0 +1,21 @@
+
+server:
+  contextPath: "/magdagwy-test"
+
+service:
+  codes:
+    url: bla-test
+
+routes:
+  geefonderneming:
+    endpoint: http://localhost:9321/magdamock/GeefOnderneming
+  magdagwy:
+    vkbo:
+      update:
+        ftp:
+          delay: 50
+        local:
+          workDirectory: C:/dvl.home/prj/bedrijvendatabank/workspace/magdagwy/magdagwy-service/target/data/test
+          delay: 50
+        jms:
+          delay: 50

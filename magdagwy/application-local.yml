@@ -1,0 +1,25 @@
+server:
+  port: 8080
+  context-path: "/magdagwy"
+
+service:
+  codes:
+    url: bla
+
+# Spring boot JMX (Jolokia) opzetten... (beveiliging kon ik enkel via -D parameters afzetten, die "sensitive: false" properties lijken niet te werken)
+endpoints:
+  jolokia:
+    enabled: true
+  actuator:
+    enabled: true
+
+routes:
+  geefonderneming:
+    endpoint: http://localhost:9321/magdamock/GeefOnderneming
+  magdagwy:
+    vkbo:
+      update:
+        ftp:
+          location: ftp://vdab:vdab@localhost/data/batch
+          options: "&disconnect=true&passiveMode=true"
+

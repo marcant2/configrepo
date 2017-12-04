@@ -1,0 +1,58 @@
+management:
+  security:
+    enabled: false
+
+spring:
+  application:
+    name: magdagwy
+  profiles:
+    active: production
+  jpa:
+    properties:
+      hibernate:
+        default_schema: SCH_MAGDAGWY
+  # we willen GEEN embedded Artemis...
+  artemis:
+    embedded:
+      enabled: false
+
+flyway:
+  enabled: false
+
+routes:
+  geefonderneming:
+    endpoint: http://localhost:8088/mockOnderneming.GeefOndernemingHttpBinding
+    username: wse.vlaanderen.be/vdab/ab21-aip
+    password: TESTPWD_TESTPWD
+    afzender:
+      identificatie: wse.vlaanderen.be/vdab/ab21-aip
+      referte: MarcTestReferte
+    ontvanger:
+      identificatie: vip.vlaanderen.be
+
+
+  magdagwy:
+    vkbo:
+      update:
+        ftp:
+          # location: ftp://vdab:vdab@10.17.25.89/data/batch
+          location: ftp://vdab:vdab@localhost/data/batch
+          include: .*\.csv|.*\.md5|.*\.sha
+          delay: 5000
+          move: downloaded
+          localWorkDirectory: tmp
+          options: ""
+        local:
+          # Working directory wordt als "root" gebruikt, van waaruit alle processing ivm files gebeurt...
+          workDirectory: C:/dvl.home/prj/bedrijvendatabank/workspace/magdagwy/magdagwy-service/target/data/batch
+          checksum-unverified: unverified
+          checksum-verified: verified
+          checksum-failed: checksum-failed
+          failed: failed
+          delay: 5000
+        jms:
+          host: tcp://localhost:61616
+          queuename: magdagwy2vkbo
+          username: admin
+          password: admin
+          delay: 5000
